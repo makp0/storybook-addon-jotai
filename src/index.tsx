@@ -10,7 +10,7 @@ import { Provider } from "jotai";
 import { useAtomValue } from "jotai/utils";
 import type { Atom } from "jotai";
 
-import addons, { makeDecorator } from '@storybook/addons';
+import { addons,  makeDecorator } from '@storybook/addons';
 
 type AtomHash = {
   [key: string]: Atom<unknown>;
