@@ -31,7 +31,6 @@
     "buildBabel": "concurrently \"yarn buildBabel:cjs\" \"yarn buildBabel:esm\"",
     "buildTsc": "tsc --declaration --emitDeclarationOnly --outDir ./dist/ts",
     "clean": "rimraf ./dist",
-    "postinstall": "yarn build",
     "prebuild": "yarn clean",
     "release": "yarn build && auto shipit",
     "start": "concurrently \"yarn build:watch\" \"yarn storybook -- --no-manager-cache --quiet\"",
