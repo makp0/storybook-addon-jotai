@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
-import { withJotai } from '../dist/esm';
-import { userAtom } from '../dist/esm/constants';
+import { withJotai, atomsForStorybook } from "../dist/esm";
+import { userAtom } from "./constants";
 
-import { Header } from './Header';
+import { Header } from "./Header";
 
 export default {
-  title: 'Example/Header',
+  title: "Example/Header",
   component: Header,
   decorators: [withJotai],
 };
@@ -14,31 +14,33 @@ export default {
 const Template = (args) => <Header {...args} />;
 
 export const JohnLoggedIn = Template.bind({});
+
 JohnLoggedIn.parameters = {
-  jotai: {
+  jotai: atomsForStorybook({
     atoms: {
       user: userAtom,
     },
     values: {
       user: {
-        name: 'John Doe',
+        name: "John Doe",
       },
     },
-  },
+  }),
 };
 
 export const JaneLoggedIn = Template.bind({});
+
 JaneLoggedIn.parameters = {
-  jotai: {
+  jotai: atomsForStorybook({
     atoms: {
       user: userAtom,
     },
     values: {
       user: {
-        name: 'Jane Doe',
+        name: "Jane Doe",
       },
     },
-  },
+  }),
 };
 
 export const LoggedOut = Template.bind({});

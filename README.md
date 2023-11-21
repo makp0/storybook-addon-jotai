@@ -2,12 +2,12 @@
 
 A [Storybook](https://storybook.js.org/) Addon and Decorator for [Jotai](https://jotai.org) and track the state in a Panel.
 
-TODO: Add screenshot here
+![](./screenshot.png)
 
 ## Install
 
 ```sh
-yarn add -D storybook-addon-jotai
+yarn add -D @alexgorbatchev/storybook-addon-jotai
 ```
 
 Register the addon in `.storybook/main.js`
@@ -15,7 +15,7 @@ Register the addon in `.storybook/main.js`
 ```ts
 module.exports = {
   stories: ['../stories/**/*.stories.tsx'],
-  addons: ['storybook-addon-jotai'],
+  addons: ['@alexgorbatchev/storybook-addon-jotai'],
 };
 ```
 
@@ -52,7 +52,7 @@ export const User = () => {
 You can write a story as
 
 ```tsx
-import { withJotai } from 'storybook-addon-jotai';
+import { withJotai, atomsForStorybook } from 'storybook-addon-jotai';
 
 import { User, userAtom } from '../components/User';
 
@@ -68,7 +68,7 @@ const Template = (args) => <User {...args} />;
 
 export const JohnLoggedIn = Template.bind({});
 JohnLoggedIn.parameters = {
-  jotai: {
+  jotai: atomsForStorybook({
     atoms: {
       user: userAtom,
     },
@@ -77,12 +77,12 @@ JohnLoggedIn.parameters = {
         name: 'John Doe',
       },
     },
-  },
+  }),
 };
 
 export const JaneLoggedIn = Template.bind({});
 JaneLoggedIn.parameters = {
-  jotai: {
+  jotai: atomsForStorybook({
     atoms: {
       user: userAtom,
     },
@@ -91,7 +91,7 @@ JaneLoggedIn.parameters = {
         name: 'Jane Doe',
       },
     },
-  },
+  }),
 };
 
 export const LoggedOut = Template.bind({});
@@ -103,8 +103,3 @@ LoggedOut.args = {};
 - `yarn start` runs babel in watch mode and starts Storybook
 - `yarn build` build and package your addon code
 
-## Release Management
-
-### Creating a release
-
-Automatically created when pushing to GitHub
