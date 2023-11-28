@@ -12,3 +12,7 @@ export type Parameters<T extends Record<string, unknown>> = {
   atoms: AtomHash<T>;
   values: Values<T>;
 };
+
+export type JotaiParameters = {
+  jotai?: Parameters<any>;
+};

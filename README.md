@@ -2,6 +2,8 @@
 
 A [Storybook](https://storybook.js.org/) Addon and Decorator for [Jotai](https://jotai.org) and track the state in a Panel.
 
+If you want to setup `parameters` to be strongly typed, see [@alexgorbatchev/storybook-parameters](https://github.com/alexgorbatchev/storybook-parameters).
+
 ![](./screenshot.png)
 
 ## Install
@@ -28,7 +30,7 @@ import { useAtom, atom } from 'jotai';
 
 const userAtom = atom(null);
 
-export const User = () => {
+export const Header = () => {
   const [user] = useAtom(userAtom);
 
   return (
@@ -52,54 +54,94 @@ export const User = () => {
 You can write a story as
 
 ```tsx
-import { withJotai, atomsForStorybook } from 'storybook-addon-jotai';
+import { withJotai, atomsForStorybook } from '@alexgorbatchev/storybook-addon-jotai';
+import { ComponentMeta, ComponentStoryObj } from '@storybook/react';
 
-import { User, userAtom } from '../components/User';
+import { User, userAtom } from './User';
 
-import { Header } from './Header';
+type Story = ComponentStoryObj<typeof Header>;
 
-export default {
-  title: 'Example/User',
+const meta: : ComponentMeta<typeof Header> = {
+  title: 'User',
   component: User,
   decorators: [withJotai],
 };
 
-const Template = (args) => <User {...args} />;
+export default meta;
 
-export const JohnLoggedIn = Template.bind({});
-JohnLoggedIn.parameters = {
-  jotai: atomsForStorybook({
-    atoms: {
-      user: userAtom,
-    },
-    values: {
-      user: {
-        name: 'John Doe',
+export const JohnLoggedIn: Story = {
+  parameters: {
+    jotai: atomsForStorybook({
+      atoms: {
+        user: userAtom,
       },
-    },
-  }),
+      values: {
+        user: {
+          name: 'John Doe',
+        },
+      },
+    }),
+  },
 };
 
-export const JaneLoggedIn = Template.bind({});
-JaneLoggedIn.parameters = {
-  jotai: atomsForStorybook({
-    atoms: {
-      user: userAtom,
-    },
-    values: {
-      user: {
-        name: 'Jane Doe',
+export const JaneLoggedIn: Story = {
+  parameters: {
+    jotai: atomsForStorybook({
+      atoms: {
+        user: userAtom,
       },
-    },
-  }),
+      values: {
+        user: {
+          name: 'Jane Doe',
+        },
+      },
+    }),
+  };
 };
 
-export const LoggedOut = Template.bind({});
-LoggedOut.args = {};
+export const LoggedOut: Story = {};
+```
+
+Strongly typed example:
+
+```tsx
+import { ComponentMeta, ComponentStoryObj } from '@alexgorbatchev/storybook-parameters';
+import { JotaiParameters, withJotai } from '@alexgorbatchev/storybook-addon-jotai';
+
+import { User, userAtom } from './User';
+
+interface StoryParameters extends JotaiParameters {}
+
+const Header = () => <div>Header</div>;
+
+type Story = ComponentStoryObj<typeof Header, StoryParameters>;
+
+const meta: ComponentMeta<typeof Header, StoryParameters> = {
+  title: 'Header',
+  component: Header,
+  decorators: [withJotai],
+};
+
+export default meta;
+
+export const JohnLoggedIn: Story = {
+  parameters: {
+    // `jotai` is strongly typed
+    jotai: atomsForStorybook({
+      atoms: {
+        user: userAtom,
+      },
+      values: {
+        user: {
+          name: 'Jane Doe',
+        },
+      },
+    }),
+  },
+};
 ```
 
 ### Development scripts
 
 - `yarn start` runs babel in watch mode and starts Storybook
 - `yarn build` build and package your addon code
-
