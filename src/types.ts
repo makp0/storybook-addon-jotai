@@ -14,5 +14,5 @@ export type Parameters<T extends Record<string, unknown>> = {
 };
 
 export type JotaiParameters = {
-  jotai?: Parameters<any>;
+  jotai?: Partial<Parameters<any>>;
 };
