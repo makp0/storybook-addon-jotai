@@ -1,4 +1,4 @@
-import type { WritableAtom } from "jotai";
+import type { WritableAtom } from 'jotai';
 
 export type AtomHash<T extends Record<string, unknown>> = {
   [K in keyof T]: WritableAtom<T[K], any, any>;

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { useChannel } from "@storybook/api";
+import React, { useState } from 'react';
 
-import { AddonPanel } from "@storybook/components";
-import { EVENTS } from "./constants";
-import { PanelContent } from "./components/PanelContent";
+import { useChannel } from '@storybook/api';
+import { AddonPanel } from '@storybook/components';
+
+import { PanelContent } from './components/PanelContent';
+import { EVENTS } from './constants';
 
 interface PanelProps {
   active: boolean;
@@ -27,7 +28,10 @@ export const Panel: React.FC<PanelProps> = (props) => {
 
   return (
     <AddonPanel {...props}>
-      <PanelContent currentValues={currentValues} initialValues={initialValues} />
+      <PanelContent
+        currentValues={currentValues}
+        initialValues={initialValues}
+      />
     </AddonPanel>
   );
 };

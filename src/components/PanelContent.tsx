@@ -1,13 +1,17 @@
-import React from "react";
-import { themes, convert } from "@storybook/theming";
-import { TabsState } from "@storybook/components";
+import React from 'react';
+
+import { TabsState } from '@storybook/components';
+import { convert, themes } from '@storybook/theming';
 
 interface PanelContentProps {
-  initialValues: any,
-  currentValues: any,
+  initialValues: any;
+  currentValues: any;
 }
 
-export const PanelContent: React.FC<PanelContentProps> = ({ initialValues, currentValues }) => (
+export const PanelContent: React.FC<PanelContentProps> = ({
+  initialValues,
+  currentValues,
+}) => (
   <TabsState
     initial="initialValues"
     backgroundColor={convert(themes.normal).background.hoverable}
@@ -17,18 +21,14 @@ export const PanelContent: React.FC<PanelContentProps> = ({ initialValues, curre
       title="Initial Values"
       color={convert(themes.normal).color.purple}
     >
-      <pre>
-        {JSON.stringify(initialValues, null, 2)}
-      </pre>
+      <pre>{JSON.stringify(initialValues, null, 2)}</pre>
     </div>
     <div
       id="currentValues"
       title="Current Values"
       color={convert(themes.normal).color.green}
     >
-      <pre>
-        {JSON.stringify(currentValues, null, 2)}
-      </pre>
+      <pre>{JSON.stringify(currentValues, null, 2)}</pre>
     </div>
   </TabsState>
 );

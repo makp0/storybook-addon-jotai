@@ -8,15 +8,15 @@ import { Parameters } from './types';
 import { Wrapper } from './Wrapper';
 
 export const withJotai = makeDecorator({
-  name: "withJotai",
-  parameterName: "jotai",
+  name: 'withJotai',
+  parameterName: 'jotai',
   skipIfNoParametersOrOptions: false,
   wrapper: (storyFn, context, { parameters }) => {
     const channel = addons.getChannel();
     const store = useStore();
 
     if (!parameters) {
-      channel.emit(EVENTS.RENDERED, { note: "withJotai decorator not used" });
+      channel.emit(EVENTS.RENDERED, { note: 'withJotai decorator not used' });
       return storyFn(context);
     }
 

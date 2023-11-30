@@ -1,15 +1,14 @@
-import React from "react";
+import React from 'react';
 
-import { useAtom } from "jotai";
+import { useAtom } from 'jotai';
 
-import { userAtom } from "./constants.js";
+import { userAtom } from './constants.js';
 
-import { Button } from "./Button";
-import "./header.css";
+import { Button } from './Button';
+import './header.css';
 
 export const Header = () => {
   const [user, setUser] = useAtom(userAtom);
-  console.error("Rendering NHeader", user);
 
   return (
     <header>
@@ -53,7 +52,7 @@ export const Header = () => {
               <Button
                 size="small"
                 label="Log in"
-                onClick={() => setUser({ name: "John" })}
+                onClick={() => setUser({ name: 'John' })}
               />
               <Button primary size="small" label="Sign up" />
             </>
