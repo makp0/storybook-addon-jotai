@@ -54,7 +54,7 @@ export const Header = () => {
 You can write a story as
 
 ```tsx
-import { withJotai, atomsForStorybook } from '@alexgorbatchev/storybook-addon-jotai';
+import { atomsForStorybook } from '@alexgorbatchev/storybook-addon-jotai';
 import { ComponentMeta, ComponentStoryObj } from '@storybook/react';
 
 import { User, userAtom } from './User';
@@ -64,7 +64,6 @@ type Story = ComponentStoryObj<typeof Header>;
 const meta: : ComponentMeta<typeof Header> = {
   title: 'User',
   component: User,
-  decorators: [withJotai],
 };
 
 export default meta;
@@ -106,7 +105,7 @@ Strongly typed example:
 
 ```tsx
 import { ComponentMeta, ComponentStoryObj } from '@alexgorbatchev/storybook-parameters';
-import { JotaiParameters, withJotai } from '@alexgorbatchev/storybook-addon-jotai';
+import { JotaiParameters } from '@alexgorbatchev/storybook-addon-jotai';
 
 import { User, userAtom } from './User';
 
@@ -119,7 +118,6 @@ type Story = ComponentStoryObj<typeof Header, StoryParameters>;
 const meta: ComponentMeta<typeof Header, StoryParameters> = {
   title: 'Header',
   component: Header,
-  decorators: [withJotai],
 };
 
 export default meta;
