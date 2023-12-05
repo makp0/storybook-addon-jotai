@@ -18,9 +18,6 @@ import { Parameters } from './types';
  *   }),
  * };
  */
-export function atomsForStorybook<T extends Record<string, unknown>>({
-  atoms,
-  values,
-}: Parameters<T>) {
+export function atomsForStorybook<T extends Record<string, unknown>>({ atoms, values }: Parameters<T>) {
   return { atoms, values };
 }

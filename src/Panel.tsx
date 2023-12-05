@@ -4,34 +4,34 @@ import { useChannel } from '@storybook/api';
 import { AddonPanel } from '@storybook/components';
 
 import { PanelContent } from './components/PanelContent';
-import { EVENTS } from './constants';
+import { EVENTS, NOTE } from './constants';
 
 interface PanelProps {
   active: boolean;
   key: string;
 }
 
-export const Panel: React.FC<PanelProps> = (props) => {
-  const [currentValues, setCurrentValues] = useState({});
-  const [initialValues, setInitialValues] = useState({});
+const { SET_INITIAL_VALUES, SET_CURRENT_VALUES } = EVENTS;
 
-  const { RENDERED, ATOMS_CHANGED } = EVENTS;
+export const Panel: React.FC<PanelProps> = (props) => {
+  const [currentValues, setCurrentValues] = useState();
+  const [initialValues, setInitialValues] = useState();
+  const note = initialValues && initialValues[NOTE];
+
   useChannel({
-    [RENDERED]: (values) => {
+    [SET_INITIAL_VALUES]: (values) => {
       setInitialValues(values);
       setCurrentValues(values);
     },
-    [ATOMS_CHANGED]: (values) => {
+    [SET_CURRENT_VALUES]: (values) => {
       setCurrentValues(values);
     },
   });
 
   return (
     <AddonPanel {...props}>
-      <PanelContent
-        currentValues={currentValues}
-        initialValues={initialValues}
-      />
+      {note && <code style={{ padding: '1em' }}>{note}</code>}
+      {!note && <PanelContent currentValues={currentValues} initialValues={initialValues} />}
     </AddonPanel>
   );
 };

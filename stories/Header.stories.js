@@ -42,5 +42,24 @@ JaneLoggedIn.parameters = {
   }),
 };
 
-export const LoggedOut = Template.bind({});
-LoggedOut.args = {};
+export const NoJotaiParameter = Template.bind({});
+
+export const MissingAtomsParameter = Template.bind({});
+MissingAtomsParameter.parameters = {
+  jotai: atomsForStorybook({
+    values: {
+      user: {
+        name: 'Jane Doe',
+      },
+    },
+  }),
+};
+
+export const MissingValuesParameter = Template.bind({});
+MissingValuesParameter.parameters = {
+  jotai: atomsForStorybook({
+    atoms: {
+      user: userAtom,
+    },
+  }),
+};

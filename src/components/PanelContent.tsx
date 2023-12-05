@@ -8,26 +8,12 @@ interface PanelContentProps {
   currentValues: any;
 }
 
-export const PanelContent: React.FC<PanelContentProps> = ({
-  initialValues,
-  currentValues,
-}) => (
-  <TabsState
-    initial="initialValues"
-    backgroundColor={convert(themes.normal).background.hoverable}
-  >
-    <div
-      id="initialValues"
-      title="Initial Values"
-      color={convert(themes.normal).color.purple}
-    >
+export const PanelContent: React.FC<PanelContentProps> = ({ initialValues, currentValues }) => (
+  <TabsState initial="initialValues" backgroundColor={convert(themes.normal).background.hoverable}>
+    <div id="initialValues" title="Initial Values" color={convert(themes.normal).color.purple}>
       <pre>{JSON.stringify(initialValues, null, 2)}</pre>
     </div>
-    <div
-      id="currentValues"
-      title="Current Values"
-      color={convert(themes.normal).color.green}
-    >
+    <div id="currentValues" title="Current Values" color={convert(themes.normal).color.green}>
       <pre>{JSON.stringify(currentValues, null, 2)}</pre>
     </div>
   </TabsState>

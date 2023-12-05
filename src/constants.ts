@@ -1,8 +1,10 @@
-export const ADDON_ID = 'storybook/jotai-addon';
+export const ADDON_ID = '@alexgorbatchev/jotai';
 export const PANEL_ID = `${ADDON_ID}/panel`;
-export const PARAM_KEY = `jotai`;
 
 export const EVENTS = {
-  ATOMS_CHANGED: `${ADDON_ID}/atom_changed`,
-  RENDERED: `${ADDON_ID}/rendered`,
+  SET_CURRENT_VALUES: `${ADDON_ID}/set_current_values`,
+  SET_INITIAL_VALUES: `${ADDON_ID}/set_initial_values`,
 };
+
+// can't use a Symbol here because values are passed around via postMessage
+export const NOTE = '_________note****';

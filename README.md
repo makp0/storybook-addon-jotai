@@ -21,6 +21,12 @@ module.exports = {
 };
 ```
 
+## Important
+
+Please keep in mind that the addon wraps everything with `Provider` from `jotai` package. It's important
+that your story components don't include the `Provider`, otherwise the addon won't be able to see and set
+atom values.
+
 ## Usage
 
 Given a simple component:
