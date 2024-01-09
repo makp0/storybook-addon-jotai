@@ -1,5 +1,5 @@
 import { Provider as JotaiProvider, useAtomValue, useSetAtom } from 'jotai';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { addons, makeDecorator } from '@storybook/addons';
 
@@ -15,7 +15,13 @@ interface CommonProps {
 
 const StorybookAddonJotaiInContext = ({ parameters, children }: CommonProps) => {
   const newSetters: typeof setters = {};
-  const { atoms, values: initialValues } = (parameters as Parameters<any>) || {};
+  const parametersValue: Parameters<any> = useMemo(
+    () => (typeof parameters === 'function' ? parameters() : parameters || {}),
+    [],
+  );
+  const { atoms: atomsFuncOrValue, values: valuesFuncOrValue } = parametersValue;
+  const atoms = typeof atomsFuncOrValue === 'function' ? atomsFuncOrValue() : atomsFuncOrValue;
+  const initialValues = typeof valuesFuncOrValue === 'function' ? valuesFuncOrValue() : valuesFuncOrValue;
   const channel = addons.getChannel();
   const currentAtomValues: Record<string, any> = {};
   const [setters, setSetters] = useState<Record<string, Function> | undefined>();

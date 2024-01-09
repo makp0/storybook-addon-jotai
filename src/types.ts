@@ -9,10 +9,10 @@ export type AtomValues<T extends Record<string, unknown>> = {
 };
 
 export type Parameters<T extends Record<string, unknown>> = {
-  atoms: AtomHash<T>;
-  values: AtomValues<T>;
+  atoms: AtomHash<T> | (() => AtomHash<T>);
+  values: AtomValues<T> | (() => AtomValues<T>);
 };
 
-export type JotaiParameters = {
-  jotai?: Partial<Parameters<any>>;
+export type JotaiParameters<T extends Record<string, unknown>> = {
+  jotai?: Partial<Parameters<T>> | (() => Partial<Parameters<T>>);
 };

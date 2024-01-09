@@ -42,6 +42,21 @@ JaneLoggedIn.parameters = {
   }),
 };
 
+export const JaneLoggedInDeferred = Template.bind({});
+JaneLoggedInDeferred.parameters = {
+  jotai: () =>
+    atomsForStorybook({
+      atoms: {
+        user: userAtom,
+      },
+      values: {
+        user: {
+          name: 'Jane Doe',
+        },
+      },
+    }),
+};
+
 export const NoJotaiParameter = Template.bind({});
 
 export const MissingAtomsParameter = Template.bind({});

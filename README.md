@@ -49,7 +49,7 @@ export const Header = () => {
       ) : (
         <div>
           <div>No one is signed in</div>
-          <Button size="small" label="Log in" onClick={() => setUser({ name: 'John' })}/>
+          <Button size="small" label="Log in" onClick={() => setUser({ name: 'John' })} />
         </div>
       )}
     </div>
@@ -89,17 +89,18 @@ export const JohnLoggedIn: Story = {
   },
 };
 
+// `jotai`, `atoms`, and `values` each can be a function for deferred evaluation.
 export const JaneLoggedIn: Story = {
   parameters: {
-    jotai: atomsForStorybook({
-      atoms: {
+    jotai: () => atomsForStorybook({
+      atoms: () => ({
         user: userAtom,
-      },
-      values: {
+      }),
+      values: () => ({
         user: {
           name: 'Jane Doe',
         },
-      },
+      }),
     }),
   };
 };
