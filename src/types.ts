@@ -13,6 +13,6 @@ export type Parameters<T extends Record<string, unknown>> = {
   values: AtomValues<T> | (() => AtomValues<T>);
 };
 
-export type JotaiParameters<T extends Record<string, unknown>> = {
-  jotai?: Partial<Parameters<T>> | (() => Partial<Parameters<T>>);
+export type JotaiParameters = {
+  jotai?: Partial<Parameters<any>> | (() => Partial<Parameters<any>>);
 };

@@ -31,7 +31,7 @@ const StorybookAddonJotaiInContext = ({ parameters, children }: CommonProps) => 
     return children;
   };
 
-  if (!parameters) return userNote('parameters.jotai not defined');
+  if (!parametersValue) return userNote('parameters.jotai not defined');
   if (!atoms) return userNote('parameters.jotai.atoms not defined');
   if (!initialValues) return userNote('parameters.jotai.values not defined');
 
