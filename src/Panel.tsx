@@ -1,37 +1,52 @@
 import React, { useState } from 'react';
 
-import { useChannel } from '@storybook/api';
-import { AddonPanel } from '@storybook/components';
+import { TabsState } from '@storybook/components';
+import { useChannel } from '@storybook/manager-api';
+import { convert, themes } from '@storybook/theming';
 
-import { PanelContent } from './components/PanelContent';
 import { EVENTS, NOTE } from './constants';
 
-interface PanelProps {
-  active: boolean;
-  key: string;
-}
+type PanelProps = {
+  active?: boolean;
+};
 
-const { SET_INITIAL_VALUES, SET_CURRENT_VALUES } = EVENTS;
+type PanelContentProps = {
+  initialValues: any;
+  currentValues: any;
+};
 
-export const Panel: React.FC<PanelProps> = (props) => {
+const PanelContent: React.FC<PanelContentProps> = ({ initialValues, currentValues }) => (
+  <TabsState initial="initialValues" backgroundColor={convert(themes.normal).background.hoverable}>
+    <div id="initialValues" title="Initial Values" color={convert(themes.normal).color.purple}>
+      <pre>{JSON.stringify(initialValues, null, 2)}</pre>
+    </div>
+    <div id="currentValues" title="Current Values" color={convert(themes.normal).color.green}>
+      <pre>{JSON.stringify(currentValues, null, 2)}</pre>
+    </div>
+  </TabsState>
+);
+
+export const Panel: React.FC<PanelProps> = ({ active }) => {
   const [currentValues, setCurrentValues] = useState();
   const [initialValues, setInitialValues] = useState();
   const note = initialValues && initialValues[NOTE];
 
   useChannel({
-    [SET_INITIAL_VALUES]: (values) => {
+    [EVENTS.SET_INITIAL_VALUES]: (values: any) => {
       setInitialValues(values);
       setCurrentValues(values);
     },
-    [SET_CURRENT_VALUES]: (values) => {
+    [EVENTS.SET_CURRENT_VALUES]: (values: any) => {
       setCurrentValues(values);
     },
   });
 
+  if (!active) return null;
+
   return (
-    <AddonPanel {...props}>
+    <>
       {note && <code style={{ padding: '1em' }}>{note}</code>}
       {!note && <PanelContent currentValues={currentValues} initialValues={initialValues} />}
-    </AddonPanel>
+    </>
   );
 };

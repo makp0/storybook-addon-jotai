@@ -1,6 +1,6 @@
 # Storybook Jotai Addon
 
-A [Storybook](https://storybook.js.org/) Addon and Decorator for [Jotai](https://jotai.org) and track the state in a Panel.
+A [Storybook](https://storybook.js.org/) Addon and Decorator for [Jotai](https://jotai.org) mocking and tracking.
 
 If you want to setup `parameters` to be strongly typed, see [@alexgorbatchev/storybook-parameters](https://github.com/alexgorbatchev/storybook-parameters).
 
@@ -9,13 +9,13 @@ If you want to setup `parameters` to be strongly typed, see [@alexgorbatchev/sto
 ## Install
 
 ```sh
-yarn add -D @alexgorbatchev/storybook-addon-jotai
+npm i --save-dev @alexgorbatchev/storybook-addon-jotai
 ```
 
 Register the addon in `.storybook/main.js`
 
 ```ts
-module.exports = {
+export default {
   stories: ['../stories/**/*.stories.tsx'],
   addons: ['@alexgorbatchev/storybook-addon-jotai'],
 };
@@ -61,13 +61,13 @@ You can write a story as
 
 ```tsx
 import { atomsForStorybook } from '@alexgorbatchev/storybook-addon-jotai';
-import { ComponentMeta, ComponentStoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { User, userAtom } from './User';
 
-type Story = ComponentStoryObj<typeof Header>;
+type Story = StoryObj<typeof Header>;
 
-const meta: : ComponentMeta<typeof Header> = {
+const meta: : Meta<typeof Header> = {
   title: 'User',
   component: User,
 };
@@ -111,23 +111,21 @@ export const LoggedOut: Story = {};
 Strongly typed example:
 
 ```tsx
-import { ComponentMeta, ComponentStoryObj } from '@alexgorbatchev/storybook-parameters';
+import { Meta, StoryObj } from '@alexgorbatchev/storybook-parameters';
 import { JotaiParameters } from '@alexgorbatchev/storybook-addon-jotai';
 
 import { User, userAtom } from './User';
 
 interface StoryParameters extends JotaiParameters {}
 
-const Header = () => <div>Header</div>;
-
-type Story = ComponentStoryObj<typeof Header, StoryParameters>;
-
-const meta: ComponentMeta<typeof Header, StoryParameters> = {
+const meta: Meta<typeof Header, StoryParameters> = {
   title: 'Header',
   component: Header,
 };
 
 export default meta;
+
+type Story = StoryObj<typeof Header, StoryParameters>;
 
 export const JohnLoggedIn: Story = {
   parameters: {
@@ -146,7 +144,7 @@ export const JohnLoggedIn: Story = {
 };
 ```
 
-### Development scripts
+## Development Scripts
 
-- `yarn start` runs babel in watch mode and starts Storybook
-- `yarn build` build and package your addon code
+- `npm run storybook` starts Storybook
+- `tsup` build `./dist`

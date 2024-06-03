@@ -1,19 +1,18 @@
+import { addons, makeDecorator } from '@storybook/preview-api';
 import { Provider as JotaiProvider, useAtomValue, useSetAtom } from 'jotai';
 import React, { useMemo, useState } from 'react';
-
-import { addons, makeDecorator } from '@storybook/addons';
 
 import { EVENTS, NOTE } from './constants';
 import { Parameters } from './types';
 
 (JotaiProvider as any).displayName = 'JotaiProvider';
 
-interface CommonProps {
+type Props = {
   children: React.ReactElement;
   parameters: any;
-}
+};
 
-const StorybookAddonJotaiInContext = ({ parameters, children }: CommonProps) => {
+const StorybookAddonJotaiInContext = ({ parameters, children }: Props) => {
   const setters: Record<string, Function> = {};
   const parametersValue: Parameters<any> = useMemo(
     () => (typeof parameters === 'function' ? parameters() : parameters || {}),
@@ -67,19 +66,16 @@ const StorybookAddonJotaiInContext = ({ parameters, children }: CommonProps) => 
   return children;
 };
 
-const StorybookAddonJotai = (props: CommonProps) => {
-  return (
-    <JotaiProvider>
-      <StorybookAddonJotaiInContext {...props} />
-    </JotaiProvider>
-  );
-};
+const StorybookAddonJotai = (props: Props) => (
+  <JotaiProvider>
+    <StorybookAddonJotaiInContext {...props} />
+  </JotaiProvider>
+);
 
 export const withJotai = makeDecorator({
   name: 'withJotai',
   parameterName: 'jotai',
-  skipIfNoParametersOrOptions: false,
-  wrapper: (storyFn, context, { parameters }) => {
-    return <StorybookAddonJotai parameters={parameters}>{storyFn(context) as any}</StorybookAddonJotai>;
-  },
+  wrapper: (getStory, context, { parameters }) => (
+    <StorybookAddonJotai parameters={parameters}>{getStory(context) as any}</StorybookAddonJotai>
+  ),
 });

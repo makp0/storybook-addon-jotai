@@ -1,5 +1,6 @@
 export const ADDON_ID = '@alexgorbatchev/jotai';
 export const PANEL_ID = `${ADDON_ID}/panel`;
+export const PANEL_TITLE = 'Jotai';
 
 export const EVENTS = {
   SET_CURRENT_VALUES: `${ADDON_ID}/set_current_values`,
