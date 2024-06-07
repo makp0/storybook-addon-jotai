@@ -1,6 +1,6 @@
 # Storybook Jotai Addon
 
-A [Storybook](https://storybook.js.org/) Addon and Decorator for [Jotai](https://jotai.org) mocking and tracking.
+A [Storybook](https://storybook.js.org/) v8 addon and decorator for [Jotai](https://jotai.org) mocking and displaying current values in a Storybook panel.
 
 If you want to setup `parameters` to be strongly typed, see [@alexgorbatchev/storybook-parameters](https://github.com/alexgorbatchev/storybook-parameters).
 

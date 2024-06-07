@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 import { TabsState } from '@storybook/components';
 import { useChannel } from '@storybook/manager-api';
-import { convert, themes } from '@storybook/theming';
 
 import { EVENTS, NOTE } from './constants';
 
@@ -16,11 +15,11 @@ type PanelContentProps = {
 };
 
 const PanelContent: React.FC<PanelContentProps> = ({ initialValues, currentValues }) => (
-  <TabsState initial="initialValues" backgroundColor={convert(themes.normal).background.hoverable}>
-    <div id="initialValues" title="Initial Values" color={convert(themes.normal).color.purple}>
+  <TabsState initial="initialValues">
+    <div id="initialValues" title="Initial Values">
       <pre>{JSON.stringify(initialValues, null, 2)}</pre>
     </div>
-    <div id="currentValues" title="Current Values" color={convert(themes.normal).color.green}>
+    <div id="currentValues" title="Current Values">
       <pre>{JSON.stringify(currentValues, null, 2)}</pre>
     </div>
   </TabsState>

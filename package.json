@@ -19,25 +19,24 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "node": "./dist/index.js",
-      "require": "./dist/index.js",
+      "node": "./dist/index.mjs",
+      "require": "./dist/index.mjs",
       "import": "./dist/index.mjs"
     },
     "./decorator": {
       "types": "./dist/decorator.d.ts",
-      "require": "./dist/decorator.js",
+      "require": "./dist/decorator.mjs",
       "import": "./dist/decorator.mjs"
     },
     "./preview": {
       "types": "./dist/preview.d.ts",
-      "require": "./dist/preview.js",
+      "require": "./dist/preview.mjs",
       "import": "./dist/preview.mjs"
     },
-    "./manager": "./dist/manager.js",
+    "./manager": "./dist/manager.mjs",
     "./preset": "./dist/preset.js",
     "./package.json": "./package.json"
   },
-  "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
