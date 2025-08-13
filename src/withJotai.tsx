@@ -1,4 +1,4 @@
-import { addons, makeDecorator } from '@storybook/preview-api';
+import { addons, makeDecorator } from 'storybook/preview-api';
 import { Provider as JotaiProvider, useAtomValue, useSetAtom } from 'jotai';
 import React, { useMemo, useState } from 'react';
 

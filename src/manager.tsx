@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { STORY_CHANGED } from '@storybook/core-events';
-import { addons, types, useAddonState, useChannel } from '@storybook/manager-api';
+import { STORY_CHANGED } from 'storybook/internal/core-events';
+import { addons, types, useAddonState, useChannel } from 'storybook/manager-api';
 import { ADDON_ID, EVENTS, PANEL_ID, PANEL_TITLE } from './constants';
-import { Badge, Spaced } from '@storybook/components';
+import { Badge, Spaced } from 'storybook/internal/components';
 import { Panel } from './Panel';
 
 function Title() {
