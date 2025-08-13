@@ -50,6 +50,14 @@ const StorybookAddonJotaiInContext = ({ parameters, children }: Props) => {
     Object.entries(setters).forEach(([key, setter]) => {
       setter(initialValues[key]);
     });
+
+    // Listen for atom value updates from the panel
+    channel.on(EVENTS.UPDATE_ATOM_VALUE, ({ atomKey, newValue }: { atomKey: string; newValue: any }) => {
+      const setter = setters[atomKey];
+      if (setter) {
+        setter(newValue);
+      }
+    });
   }
 
   // We are looping through the atoms to get their values, so the expectation
