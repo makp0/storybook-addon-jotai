@@ -1,10 +1,12 @@
 # Storybook Jotai Addon
 
-A [Storybook](https://storybook.js.org/) v8 addon and decorator for [Jotai](https://jotai.org) mocking and displaying current values in a Storybook panel.
-
-If you want to setup `parameters` to be strongly typed, see [@alexgorbatchev/storybook-parameters](https://github.com/alexgorbatchev/storybook-parameters).
+A [Storybook](https://storybook.js.org/) addon and decorator for [Jotai](https://jotai.org) mocking and displaying current values in a Storybook panel.
 
 ![](./screenshot.png)
+
+## Compatibility
+
+This addon supports both Storybook v8 and v9.
 
 ## Install
 
@@ -12,9 +14,9 @@ If you want to setup `parameters` to be strongly typed, see [@alexgorbatchev/sto
 npm i --save-dev @alexgorbatchev/storybook-addon-jotai
 ```
 
-Register the addon in `.storybook/main.js`
+Register the addon in `.storybook/main.js`:
 
-```ts
+```js
 export default {
   stories: ['../stories/**/*.stories.tsx'],
   addons: ['@alexgorbatchev/storybook-addon-jotai'],
@@ -57,22 +59,21 @@ export const Header = () => {
 };
 ```
 
-You can write a story as
+You can write a story as:
 
 ```tsx
 import { atomsForStorybook } from '@alexgorbatchev/storybook-addon-jotai';
 import { Meta, StoryObj } from '@storybook/react';
 
-import { User, userAtom } from './User';
+import { Header, userAtom } from './Header';
 
-type Story = StoryObj<typeof Header>;
-
-const meta: : Meta<typeof Header> = {
-  title: 'User',
-  component: User,
-};
+const meta = {
+  title: 'Header',
+  component: Header,
+} satisfies Meta<typeof Header>;
 
 export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const JohnLoggedIn: Story = {
   parameters: {
@@ -102,30 +103,39 @@ export const JaneLoggedIn: Story = {
         },
       }),
     }),
-  };
+  },
 };
 
 export const LoggedOut: Story = {};
 ```
 
-Strongly typed example:
+## Features
+
+### Interactive Panel
+
+The addon provides an interactive panel in Storybook that displays both initial and current atom values.
+You can edit current atom values directly in the panel to see how your components react to state changes.
+
+### Strongly Typed Usage
+
+For strongly typed usage with TypeScript:
 
 ```tsx
-import { Meta, StoryObj } from '@alexgorbatchev/storybook-parameters';
+import { Meta, StoryObj } from '@storybook/react';
 import { JotaiParameters } from '@alexgorbatchev/storybook-addon-jotai';
 
-import { User, userAtom } from './User';
+import { Header, userAtom } from './Header';
 
 interface StoryParameters extends JotaiParameters {}
 
-const meta: Meta<typeof Header, StoryParameters> = {
+const meta = {
   title: 'Header',
   component: Header,
-};
+} satisfies Meta<typeof Header>;
 
 export default meta;
 
-type Story = StoryObj<typeof Header, StoryParameters>;
+type Story = StoryObj<typeof meta>;
 
 export const JohnLoggedIn: Story = {
   parameters: {
@@ -136,7 +146,7 @@ export const JohnLoggedIn: Story = {
       },
       values: {
         user: {
-          name: 'Jane Doe',
+          name: 'John Doe',
         },
       },
     }),
@@ -147,4 +157,4 @@ export const JohnLoggedIn: Story = {
 ## Development Scripts
 
 - `npm run storybook` starts Storybook
-- `tsup` build `./dist`
+- `npm run build` builds the addon with tsup

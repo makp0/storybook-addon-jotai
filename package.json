@@ -1,7 +1,7 @@
 {
   "name": "@alexgorbatchev/storybook-addon-jotai",
   "version": "3.0.6",
-  "description": "A Storybook addon that allows you to use and mock React components that rely on Jotai.",
+  "description": "A Storybook addon that allows you to use, mock, and interactively control React components that rely on Jotai state management.",
   "keywords": [
     "storybook-addons",
     "jotai",
